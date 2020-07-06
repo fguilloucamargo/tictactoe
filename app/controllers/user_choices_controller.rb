@@ -2,7 +2,7 @@ class UserChoicesController < ApplicationController
   def index
     @match = Match.find(params[:match_id])
     @choice = UserChoice.new
-    @match_winner.nil? ? @match_winner = "Playing" : @match_winner = @match.winner
+    @match.winner.nil? ? @match_winner = "Playing" : @match_winner = @match.winner
   end
 
   def create
