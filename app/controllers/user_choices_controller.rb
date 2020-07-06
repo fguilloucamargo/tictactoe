@@ -17,7 +17,7 @@ class UserChoicesController < ApplicationController
     end
     if check.sort.uniq == [1, 2, 3] || check.sort.uniq == [1, 4, 7] || check.sort.uniq == [1, 5, 9] || check.sort.uniq == [2,5,8] || check.sort == [3,6,9]
       @match.winner = "You win"
-      UserChoice.destroy_all
+      @match.save!
     else
       computer_choice = (@board - check).sample
       @computer_choice = UserChoice.create(choice: computer_choice, user: 0, match: @match)
@@ -27,7 +27,7 @@ class UserChoicesController < ApplicationController
       end
       if check_computer.sort.uniq == [1, 2, 3] || check_computer.sort.uniq == [1, 4, 7] || check_computer.sort == [1, 5, 9] || check_computer.sort == [2,5,8] || check_computer.sort == [3,6,9]
         @match.winner = "You lost"
-        UserChoice.destroy_all
+        @match.save!
       end
     end
     redirect_to match_user_choices_path(@match)
